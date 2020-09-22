@@ -1,7 +1,7 @@
 {
-  "name": "game-jam-template",
+  "name": "haxe-flixel-template",
   "version": "1.0.0",
-  "description": "[![CI](https://img.shields.io/github/workflow/status/HaxeFlixel/game-jam-template/CI.svg?logo=github)](https://github.com/HaxeFlixel/game-jam-template/actions?query=workflow%3ACI)",
+  "description": "HaxeFlixel game template powered by Lix and Nodejs. The fastest way to start building a HaxeFlixel game.",
   "main": "index.js",
   "scripts": {
     "start": "npx concurrently \"npm run watch\" \"npm run server\"",
@@ -23,7 +23,7 @@
   "dependencies": {
     "concurrently": "^5.2.0",
     "fb-watchman": "^2.0.1",
-    "http-server": "^0.12.3",    
+    "http-server": "^0.12.3",
     "lix": "^15.9.0"
   }
 }
