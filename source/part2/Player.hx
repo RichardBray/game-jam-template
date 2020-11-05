@@ -19,6 +19,8 @@ class Player extends FlxSprite {
 
 	var playerState:States = Grounded;
 
+	// var shimmer:ShimmerShader;
+
 	public function new(xPos:Int = 0, yPos:Int = 0) {
 		super(xPos, yPos);
 		loadGraphic("assets/images/kenny_male.png", true, 96, 128);
@@ -34,6 +36,10 @@ class Player extends FlxSprite {
 		setFacingFlip(FlxObject.RIGHT, false, false);
 
 		acceleration.y = GRAVITY;
+
+		// shimmer = new ShimmerShader();
+		// shader = shimmer;
+		// shimmer.uTime.value = [0];
 	}
 
 	function movementStates() {
@@ -77,6 +83,7 @@ class Player extends FlxSprite {
 	override function update(elapsed:Float) {
 		left = FlxG.keys.anyPressed([LEFT, A]);
 		right = FlxG.keys.anyPressed([RIGHT, D]);
+		// shimmer.uTime.value[0] += elapsed;
 		movementStates();
 		super.update(elapsed);
 	}

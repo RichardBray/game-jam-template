@@ -15,5 +15,7 @@ class PlayState extends FlxState {
 		final box = new FlxSprite(50, 50);
 		box.makeGraphic(100, 100, FlxColor.BLUE);
 		add(box);
+
+		box.shader = new TestShader();
 	}
 }
