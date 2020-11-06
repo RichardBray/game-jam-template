@@ -3,6 +3,7 @@ package part2;
 import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxState;
+import flixel.addons.display.FlxShaderMaskCamera;
 import flixel.group.FlxGroup;
 import flixel.util.FlxCollision;
 import flixel.util.FlxColor;
@@ -13,7 +14,7 @@ class PlayState extends FlxState {
 
 	var levelBounds:FlxGroup;
 	var shimmer:ShimmerShader;
-	var cameraTwo:FlxCamera = new FlxCamera(0, 0, 96, 128);
+	var cameraTwo:FlxCamera;
 
 	override public function create() {
 		super.create();
@@ -30,16 +31,18 @@ class PlayState extends FlxState {
 		var shader = shimmer;
 		shimmer.uTime.value = [0];
 
+		cameraTwo = new FlxCamera(0, 0, 96, 192);
 		cameraTwo.follow(player);
 		cameraTwo.setFilters([new ShaderFilter(shader)]);
 		cameraTwo.bgColor = FlxColor.TRANSPARENT;
+		player.cameras = [cameraTwo];
+
 		FlxG.cameras.add(cameraTwo);
 	}
 
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
-		cameraTwo.x = player.x;
-		cameraTwo.y = player.y;
+		cameraTwo.setPosition(player.x, player.y);
 		shimmer.uTime.value[0] += elapsed;
 		FlxG.collide(player, levelBounds);
 	}
