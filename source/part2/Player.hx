@@ -18,6 +18,7 @@ class Player extends FlxSprite {
 	var right = false;
 
 	var playerState:States = Grounded;
+	var hueShader:HueShader;
 
 	public function new(xPos:Int = 0, yPos:Int = 0) {
 		super(xPos, yPos);
@@ -34,6 +35,11 @@ class Player extends FlxSprite {
 		setFacingFlip(FlxObject.RIGHT, false, false);
 
 		acceleration.y = GRAVITY;
+
+		hueShader = new HueShader();
+		hueShader.uTime.value = [0];
+
+		shader = hueShader;
 	}
 
 	function movementStates() {
@@ -68,15 +74,19 @@ class Player extends FlxSprite {
 	function movement(speed:Int) {
 		if (left && right) {
 			velocity.x = 0;
-		} else {
-			velocity.x = right ? speed : -speed;
-			facing = right ? FlxObject.RIGHT : FlxObject.LEFT;
+		} else if (right) {
+			velocity.x = speed;
+			facing = FlxObject.RIGHT;
+		} else if (left) {
+			velocity.x = -speed;
+			facing = FlxObject.LEFT;
 		}
 	}
 
 	override function update(elapsed:Float) {
 		left = FlxG.keys.anyPressed([LEFT, A]);
 		right = FlxG.keys.anyPressed([RIGHT, D]);
+		hueShader.uTime.value[0] += elapsed;
 		movementStates();
 		super.update(elapsed);
 	}
